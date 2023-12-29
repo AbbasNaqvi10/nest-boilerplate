@@ -12,7 +12,9 @@ export class AuthService {
 
   async login(loginUserDto: LoginUserDto): Promise<any> {
     console.log(loginUserDto);
-    const user = await this.userService.getUserByEmail(loginUserDto.email);
+    const user = await this.userService.getUserByUsername(
+      loginUserDto.username,
+    );
 
     if (!user || user?.password !== loginUserDto.password) {
       throw new UnauthorizedException();
@@ -25,8 +27,7 @@ export class AuthService {
     const payload = {
       id: user._id,
       name: user.name,
-      username: user.userName,
-      email: user.email,
+      username: user.username,
       role: user.role,
     };
 

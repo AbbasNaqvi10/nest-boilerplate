@@ -1,16 +1,11 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsString,
-  MaxLength,
-  Matches,
-} from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength, Matches } from 'class-validator';
+import { Role } from 'src/enums/role.enum';
 
 export class CreateUserDto {
   @IsString()
   @MaxLength(30)
   @IsNotEmpty()
-  readonly role: string;
+  readonly role: Role;
 
   @IsString()
   @MaxLength(30)
@@ -20,11 +15,7 @@ export class CreateUserDto {
   @IsString()
   @MaxLength(30)
   @IsNotEmpty()
-  readonly userName: string;
-
-  @IsEmail()
-  @IsNotEmpty()
-  readonly email: string;
+  readonly username: string;
 
   @IsString()
   @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$/, {
